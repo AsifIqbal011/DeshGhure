@@ -1,0 +1,35 @@
+{%extends 'base.html' %}
+{% block content%}
+{% load static %}
+<div class="container mt-4">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                     <img src="{% static 'images/home/sonargaon.png' %}" class="d-block w-100" alt="Heritage Site">
+                </div>
+                <div class="carousel-item">
+                      <img src="{% static 'images/home/shhatghom.jpg' %}" class="d-block w-100" alt="Historical Place">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/home/shundarban.png' %}" class="d-block w-100" alt="Historical Place">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'images/home/lalbagh.jpg' %}" class="d-block w-100" alt="Historical Place">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'images/home/ahsan_manzil.jpg' %}" class="d-block w-100" alt="Historical Place">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'images/home/coxs.png' %}" class="d-block w-100" alt="Historical Place">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+
+{% endblock%}
