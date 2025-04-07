@@ -13,3 +13,6 @@ def package(request):
 
 def review(request):
     return render(request, template_name='TestApp/review.html')
+
+def profile(request):
+    return render(request, template_name='TestApp/profile.html')

@@ -24,5 +24,5 @@ urlpatterns = [
     path('destination/', t_views.destination, name='destination'),  # destination Page
     path('package/', t_views.package, name='package'),  # package Page
     path('review/', t_views.review, name='review'),  # Review Page
-
+    path('profile/', t_views.profile, name='profile'),  # Profile Page
 ]
