@@ -21,8 +21,8 @@ from TestApp import views as t_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',t_views.home,name='home'),
-    path('about/', t_views.about, name='about'),  # About Page
-    path('contact/', t_views.contact, name='contact'),  # Contact Page
+    path('destination/', t_views.destination, name='destination'),  # destination Page
+    path('package/', t_views.package, name='package'),  # package Page
     path('review/', t_views.review, name='review'),  # Review Page
 
 ]

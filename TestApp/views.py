@@ -5,11 +5,11 @@ from django.shortcuts import render
 def home(request):
     return render(request, template_name='TestApp/home.html')
 
-def about(request):
-    return render(request, template_name='TestApp/about.html')
+def destination(request):
+    return render(request, template_name='TestApp/destination.html')
 
-def contact(request):
-    return render(request, template_name='TestApp/contact.html')
+def package(request):
+    return render(request, template_name='TestApp/package.html')
 
 def review(request):
     return render(request, template_name='TestApp/review.html')
