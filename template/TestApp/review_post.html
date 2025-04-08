@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="review-form">
+             <h2 class="mb-4 text-center form-title">Share Your Travel Experience</h2>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" name="location" required id="location" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">Rating (1 - 5)</label>
+                        <input type="number" name="rating" id="rating" class="form-control" min="1" max="5" step="0.5" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="details" class="form-label">Your Review</label>
+                        <textarea name="details" id="details" rows="5" class="form-control" placeholder="Write your experience..." required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reviewer_name" class="form-label">Your Name</label>
+                        <input type="text" name="reviewer_name" id="reviewer_name" class="form-control" placeholder="Traveler" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="review_img" class="form-label">Upload Image</label>
+                        <input type="file" name="review_img" id="review_img" class="form-control" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

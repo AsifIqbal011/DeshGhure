@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from TestApp import views as t_views
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +28,11 @@ urlpatterns = [
     path('package/', t_views.package, name='package'),  # package Page
     path('review/', t_views.review, name='review'),  # Review Page
     path('profile/', t_views.profile, name='profile'),  # Profile Page
+    path('review_post/', t_views.review_post, name='review_post'),  # Profile Page
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
+        
+urlpatterns += staticfiles_urlpatterns()        
