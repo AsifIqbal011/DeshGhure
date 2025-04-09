@@ -16,6 +16,7 @@ class Package(models.Model):
     numofPeople= models.IntegerField()
     rating = models.FloatField(default=5.0,validators=[MinValueValidator(1), MaxValueValidator(5)])
     price = models.IntegerField()
+    package_img=models.ImageField(upload_to="package_pic", default="package_pic/default.jpg")
 
     def __str__(self):
         return self.caption
@@ -29,3 +30,12 @@ class Review(models.Model):
     review_img=models.ImageField(upload_to="review_pic")
     def __str__(self):
         return self.reviewer_name
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=20, blank=True)
+    bio = models.TextField(blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
+
+    def __str__(self):
+        return self.user.username    

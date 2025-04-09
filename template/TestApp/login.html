@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Desh Ghure | Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #88fff1, #005258);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+      width: 350px;
+      padding: 40px 30px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      margin-bottom: 25px;
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .login-container input[type="submit"] {
+      width: 100%;
+      background-color: #ffffff;
+      color: #00b09b;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s ease;
+    }
+
+    .login-container input[type="submit"]:hover {
+      background-color: #e1f4ef;
+    }
+
+    .login-container .links {
+      margin-top: 20px;
+    }
+
+    .login-container .links a {
+      display: block;
+      color: #fff;
+      text-decoration: underline;
+      font-size: 14px;
+      margin: 5px 0;
+      transition: 0.2s;
+    }
+
+    .login-container .links a:hover {
+      color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login to Desh Ghure</h2>
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    <form action="#" method="POST">
+     {% csrf_token %}
+      <input type="text" name="username" placeholder="Enter Username" required>
+      <input type="password" name="password" placeholder="Enter Password" required>
+      <input type="submit" value="Login">
+    </form>
+    <div class="links">
+      <a href="{% url 'registration' %}">Create an account</a>
+      <a href="#">Forgot password?</a>
+    </div>
+  </div>
+
+</body>
+</html>

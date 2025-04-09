@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | Desh Ghure</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9f8;
+      padding: 40px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1b8f6c;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .form-group {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .full-width {
+      flex: 1 1 100%;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #1b8f6c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #157c5c;
+    }
+    .login-link a {
+      color: #157c5c;
+      text-decoration: underline;
+      font-size: 14px;
+      
+    }
+    .login-link a:hover {
+      color: #003233;
+    }
+    .custom-file-upload {
+      display: inline-block;
+      padding: 10px;
+      background-color: #e9f6f2;
+      color: #1b8f6c;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .custom-file-upload i {
+      margin-right: 8px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create A Account</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password1" required>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" name="password2" required>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" name="phone">
+      </div>
+      <div class="form-group">
+        <label>Profile Picture</label>
+        <label for="profile_pic" class="custom-file-upload">
+          <i class="fa fa-upload"></i> Upload Picture
+        </label>
+        <input type="file" id="profile_pic" name="profile_pic">
+      </div>
+      <div class="form-group full-width">
+        <label>Bio</label>
+        <textarea name="bio" rows="4"></textarea>
+      </div>
+      <div class="form-group full-width">
+        <button type="submit">Register</button>
+      </div>
+      <div class="login-link">
+        <a href="{% url 'login' %}">Already have an account? Login here</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
