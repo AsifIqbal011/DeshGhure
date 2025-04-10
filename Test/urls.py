@@ -31,6 +31,7 @@ urlpatterns = [
     path('review_post/', t_views.review_post, name='review_post'),  # Profile Page
     path('login/', t_views.login_view, name='login'),  # login Page
     path('registration/', t_views.registration, name='registration'),  # registration Page
+    path('division/<str:name>/', t_views.division_detail, name='division_detail'),
 ]
 
 if settings.DEBUG:

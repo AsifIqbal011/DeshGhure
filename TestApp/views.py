@@ -84,3 +84,7 @@ def review_post(request):
     reviews=Review.objects.all()
     context={'reviews': reviews}
     return render(request, template_name='TestApp/review_post.html',context=context)
+
+def division_detail(request, name):
+    context={'division': name.capitalize()}
+    return render(request, template_name='TestApp/division_detail.html',context=context)
