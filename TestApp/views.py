@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login as auth_login,authenticate
+from django.contrib.auth import login as auth_login,authenticate ,logout as auth_logout
 from django.contrib import messages
 from .models import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
@@ -21,8 +22,40 @@ def review(request):
     context={'reviews': reviews}
     return render(request, template_name='TestApp/review.html',context=context)
 
+@login_required
 def profile(request):
-    return render(request, template_name='TestApp/profile.html')
+    user_profile, created = Profile.objects.get_or_create(user=request.user)
+    
+    if request.method == "POST":
+        location_id = request.POST.get("location")
+        status = request.POST.get("status")  # 'visited' or 'wishlist'
+        
+        # Make sure to use the actual Location object
+        location = Location.objects.get(id=location_id)
+
+        BucketList.objects.update_or_create(
+            user=request.user,
+            location=location,
+            defaults={'status': status}
+        )
+        return redirect('profile')  # only redirect after POST
+
+    # GET method: show profile page
+    locations = Location.objects.all()
+    user_bucketlist = BucketList.objects.filter(user=request.user)
+    user_profile = Profile.objects.get(user=request.user)
+
+    visited_spots = BucketList.objects.filter(user=request.user, status='visited').count()
+    wishlist_spots = BucketList.objects.filter(user=request.user, status='wishlist').count()
+    
+    context = {
+        'locations': locations,
+        'visited_spots': visited_spots,
+        'wishlist_spots': wishlist_spots,
+        'user_bucketlist': user_bucketlist,
+        'profile': user_profile
+    }
+    return render(request, template_name='TestApp/profile.html', context=context)
 
 def login_view(request):
     if request.method == 'POST':
@@ -58,8 +91,11 @@ def registration(request):
         return redirect('home') 
     return render(request, template_name='TestApp/registration.html')
 
+def logout_view(request):
+    auth_logout(request)
+    return redirect('home')
 
-
+@login_required
 def review_post(request):
     if request.method=="POST":
         data = request.POST
@@ -88,3 +124,16 @@ def review_post(request):
 def division_detail(request, name):
     context={'division': name.capitalize()}
     return render(request, template_name='TestApp/division_detail.html',context=context)
+
+def update_bucket_list(request):
+    if request.method == 'POST':
+        location_name = request.POST.get('location')
+        status = request.POST.get('status')  # 'visited' or 'wishlist'
+
+        location, created = Location.objects.get_or_create(name=location_name)
+        BucketList.objects.update_or_create(
+            user=request.user,
+            location=location,
+            defaults={'status': status}
+        )
+        return redirect('profile')

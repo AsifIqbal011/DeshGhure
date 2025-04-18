@@ -20,6 +20,7 @@ from TestApp import views as t_views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('login/', t_views.login_view, name='login'),  # login Page
     path('registration/', t_views.registration, name='registration'),  # registration Page
     path('division/<str:name>/', t_views.division_detail, name='division_detail'),
+    path('logout/', t_views.logout_view, name='logout'),
 ]
 
 if settings.DEBUG:

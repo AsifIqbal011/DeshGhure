@@ -225,14 +225,26 @@
                   <i class="fas fa-search"></i>
                 </button>
               </form>
+              {% if not user.is_authenticated %}
               <button class="btn ms-2">
                 <a href="{% url 'profile' %}"
                   ><i class="fa-solid fa-circle-user"></i
                 ></a>
               </button>
-              <button class="btn ms-2">
-                <i class="fa-solid fa-earth-americas"></i>
-              </button>
+              {% endif %}
+              {% if user.is_authenticated %}
+                {% with user.profile as profile %}
+                 <ui class=" px-2">
+                   <a href="{% url 'profile' %}">
+                    <img src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}{% else %}{% static 'images/home/astronaut.png' %}{% endif %}"
+                      alt="Profile" title="Profile" style="height: 40px; width: 40px; border-radius: 50%;">
+                   </a>
+                 </ui>
+                {% endwith %}
+              {% endif %}
+              {% if user.is_authenticated %}
+              <ui class="nav-item p-2"> <a  href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket" title="Logout"></i></a></ui>
+              {% endif %}
             </div>
           </div>
         </div>
