@@ -3,8 +3,15 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
+class Division(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class Location(models.Model):
     location =models.CharField(max_length=100)
+    division = models.ForeignKey(Division, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.location

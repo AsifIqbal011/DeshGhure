@@ -96,6 +96,74 @@
             font-weight: bold;
             color: #333;
         }
+
+        .text-white {
+            color: #fff !important;
+      }
+        .text-decoration-none {
+           text-decoration: none !important;
+      }
+      .destination-overlay {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        bottom: 30px;
+        left: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        transition: .5s;
+        z-index: 1;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.mb-2,
+.my-2 {
+  margin-bottom: 0.5rem !important;
+}
+.overflow-hidden {
+  overflow: hidden !important;
+}
+.position-relative {
+  position: relative !important;
+}
+.destination-item img {
+  transition: .5s;
+}
+
+.destination-item:hover img {
+  transform: scale(1.3);
+}
+
+.destination-overlay {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: .5s;
+  z-index: 1;
+}
+
+.destination-item:hover .destination-overlay {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  border-width: 30px;
+}
+
       /* Large screen image size */
       @media (min-width: 992px) {
         .carousel-item img {
