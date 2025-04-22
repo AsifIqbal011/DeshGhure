@@ -25,7 +25,7 @@
             <div class="col-md-4 mb-4">
                 <div class="p-4 rounded-4" style="background-color: #e6faff;">
                     <h3 class="mb-4">Update bucket list</h3>
-                    
+
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-group mb-3">
@@ -33,7 +33,7 @@
                                 {% for loc in locations %}
                                     <option value="{{ loc.id }}">{{ loc.location }}</option>
                                 {% endfor %}
-                            </select> 
+                            </select>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="status" id="wishlist" value="wishlist"  required>
