@@ -4,6 +4,8 @@ from django.contrib.auth import login as auth_login,authenticate ,logout as auth
 from django.contrib import messages
 from .models import *
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+import datetime
 # Create your views here.
 
 def home(request):
@@ -103,11 +105,12 @@ def review_post(request):
         location=data.get('location')
         rating =data.get('rating')
         details=data.get('details')
-        reviewer_name=data.get('reviewer_name')
+        reviewer_name = request.user.username
         review_date=data.get('review_date')
         review_img=request.FILES.get('review_img')
 
         Review.objects.create(
+            user=request.user,
             location=location,
             rating =rating ,
             details=details,
@@ -120,6 +123,36 @@ def review_post(request):
     reviews=Review.objects.all()
     context={'reviews': reviews}
     return render(request, template_name='TestApp/review_post.html',context=context)
+
+@login_required
+def my_reviews(request):
+    user_reviews = Review.objects.filter(user=request.user)
+    context={'user_reviews': user_reviews}
+    return render(request, 'TestApp/my_reviews.html', context=context)
+
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+
+    if request.method == "POST":
+        review.location = request.POST.get("location")
+        review.rating = request.POST.get("rating")
+        review.details = request.POST.get("details")
+        review.review_date = datetime.date.today()
+
+        if 'review_img' in request.FILES:
+            review.review_img = request.FILES['review_img']
+
+        review.save()
+        return redirect('my_reviews')
+    context={'review': review}
+    return render(request, 'TestApp/edit_review.html', context=context)
+
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+    review.delete()
+    return redirect('my_reviews')
 
 def division_detail(request, name):
     context={'division': name.capitalize()}

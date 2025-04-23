@@ -27,16 +27,18 @@ class Package(models.Model):
 
     def __str__(self):
         return self.caption
-    
+
 class Review(models.Model):
-    location=models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    location = models.CharField(max_length=100)
     rating = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)],default=5.0)
-    details=models.TextField()
-    reviewer_name=models.CharField(max_length=100,default="Traveler")
+    details = models.TextField()
+    reviewer_name=models.CharField(max_length=100,null=True, blank=True)
     review_date=models.DateTimeField(auto_now_add=True)
-    review_img=models.ImageField(upload_to="review_pic")
+    review_img = models.ImageField(upload_to='review_pic')
+
     def __str__(self):
-        return self.reviewer_name
+        return f"{self.user.username} - {self.location}"    
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

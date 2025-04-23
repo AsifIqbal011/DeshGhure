@@ -34,6 +34,9 @@ urlpatterns = [
     path('registration/', t_views.registration, name='registration'),  # registration Page
     path('division/<str:name>/', t_views.division_detail, name='division_detail'),
     path('logout/', t_views.logout_view, name='logout'),
+    path('my-reviews/', t_views.my_reviews, name='my_reviews'),
+    path('review/edit/<str:review_id>/',t_views.edit_review, name='edit_review'),
+    path('review/delete/<str:review_id>/', t_views.delete_review, name='delete_review'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4">
+  <h2 class="mb-4">My Reviews</h2>
+
+  {% if user_reviews %}
+    <div class="row">
+      {% for review in user_reviews %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            {% if review.review_img %}
+              <img src="{{ review.review_img.url }}" class="card-img-top fixed-image" alt="Review Image">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ review.location }}</h5>
+              <p class="card-text">{{ review.details }}</p>
+              <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+              <p><small>Posted on {{ review.review_date }}</small></p>
+              <a href="{% url 'edit_review' review.id %}" class="btn btn-warning btn-sm">Edit</a>
+              <a href="{% url 'delete_review' review.id %}" class="btn btn-danger btn-sm"
+                 onclick="return confirm('Are you sure you want to delete this review?');">Delete</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>You haven't posted any reviews yet.</p>
+  {% endif %}
+</div>
+
+{% endblock %}
