@@ -88,36 +88,29 @@
 </head>
 <body>
   <div class="container">
-    <h2>Create A Account</h2>
+   
+    <h2>Update Profile</h2>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
         <label>Username</label>
-        <input type="text" name="username" required>
+        <input type="text" name="username" value="{{ user.username }}" required>
       </div>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" name="email" required>
+        <input type="email" name="email" value="{{ user.email}}" required>
       </div>
       <div class="form-group">
         <label >First Name</label>
-        <input type="text" name="first_name" required>
+        <input type="text" name="first_name" value="{{ user.first_name }}" required>
       </div>
       <div class="form-group">
         <label >Last Name</label>
-        <input type="text" name="last_name" required>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="password1" required>
-      </div>
-      <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" name="password2" required>
+        <input type="text" name="last_name" value="{{ user.last_name }}" required>
       </div>
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="text" name="phone">
+        <input type="text" name="phone" value="{{ profile.phone }}">
       </div>
       <div class="form-group">
         <label>Profile Picture</label>
@@ -125,17 +118,19 @@
           <i class="fa fa-upload"></i> Upload Picture
         </label>
         <input type="file" id="profile_pic" name="profile_pic">
-      </div>
+    </div>
       <div class="form-group full-width">
         <label>Bio</label>
-        <textarea name="bio" rows="4"></textarea>
+        <textarea name="bio" rows="4">{{ profile.bio }}</textarea>
       </div>
       <div class="form-group full-width">
-        <button type="submit">Register</button>
+        <button type="submit">Update Profile</button>
       </div>
-      <div class="login-link">
-        <a href="{% url 'login' %}">Already have an account? Login here</a>
-      </div>
+     
+        <a href="{% url 'profile' %}" style="text-decoration: none; color: #003233; font-weight: bold;">Cancel</a>
+        
+       
+
     </form>
   </div>
 </body>

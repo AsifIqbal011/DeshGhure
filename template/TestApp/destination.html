@@ -8,18 +8,66 @@
             <h1>Explore Top Destination</h1>
         </div>
         <div class="row">
+            {% for location in featured_locations %}
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="destination-item position-relative overflow-hidden mb-2">
-                    <img class="img-fluid" src="{% static 'images/home/chittagong.jpg' %}" alt="">
+                    <img class="img-fluid fixed-image" src="{{ location.image.url }}" alt="{{ location.name }}">
+                    <a class="destination-overlay text-white text-decoration-none" href="{% url 'location_detail' location.id %}">
+                        <h5 class="text-white">{{ location.location }}</h5>
+                        <span>{{ location.caption }}</span>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="destination-item position-relative overflow-hidden mb-2">
+                    <img class="img-fluid fixed-image" src="{% static 'images/home/chittagong.jpg' %}" alt="">
                     <a class="destination-overlay text-white text-decoration-none" href="">
                         <h5 class="text-white">United States</h5>
                         <span>100 Cities</span>
                     </a>
                 </div>
             </div>
-
-            
         </div>
+
+        <div class="container-fluid bg-light py-3 mb-4">
+            <div class="d-flex flex-wrap justify-content-center nav nav-pills" id="divisionTabs">
+              {% for division in divisions %}
+                <a href="?division={{ division.id }}"
+                   class="nav-link mx-2 mb-2 {% if division.id == selected_division_id %}active bg-primary text-white{% else %}bg-info text-white{% endif %}"
+                   style="width: 120px; text-align: center; border-radius: 5px;">
+                  <img src="{% static 'images/divisions/'|add:division.name|add:'.svg' %}" alt="{{ division.name }}" class="img-fluid mb-2" >
+                  <div class="small fw-bold text-uppercase">{{ division.name }}</div>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        
+          <div class="container">
+            <div class="row">
+              {% for location in locations %}
+                <div class="col-12 mb-4">
+                  <div class="d-flex flex-column flex-md-row shadow-sm bg-white rounded overflow-hidden">
+                    <div class="col-md-4 p-0">
+                      <img src="{{ location.image.url }}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 220px;" alt="{{ location.location }}">
+                    </div>
+                    <div class="col-md-5 p-4">
+                      <h5 class="text-uppercase text-primary">{{ location.location }}</h5>
+                      <p class="text-muted">{{ location.caption }}</p>
+                      <p>{{ location.description|truncatewords:25 }}</p>
+                    </div>
+                    <div class="col-md-3 bg-info text-white d-flex flex-column justify-content-center align-items-center p-3">
+                      <h4>৳{{ location.cost_by_bus }}</h4>
+                      <a href="{% url 'location_detail' location.id %}" class="btn btn-light btn-sm text-uppercase fw-bold mt-2">Continue Reading</a>
+                    </div>
+                  </div>
+                </div>
+              {% empty %}
+                <p class="text-center text-muted">No locations found in this division.</p>
+              {% endfor %}
+            </div>
+          </div>
+          
     </div>
 </div>
 

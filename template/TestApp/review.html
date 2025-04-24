@@ -43,8 +43,9 @@
             <div class="col-lg-4 col-md-6 mb-4 pb-2">
                 <div class="blog-item package-item ">
                     <div class="position-relative" >
-                        <img class="img-fluid fixed-image" src="/media/{{review.review_img}}" alt="" >
-                        
+                        <a data-bs-toggle="modal" data-bs-target="#imageModal{{ review.id }}">
+                            <img class="img-fluid fixed-image" src="/media/{{review.review_img}}" alt="">
+                          </a>
                         <div class="blog-date">
                             <h6 class="font-weight-bold mb-n1">{{review.review_date|date:"F j"}}</h6>
                             <small class="text-white text-uppercase">{{review.review_date|date:"Y"}}</small>
@@ -68,7 +69,15 @@
                         </div>
                 </div>
             </div>
-       
+            <div class="modal fade" id="imageModal{{ review.id }}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-body p-0">
+                      <img src="/media/{{ review.review_img }}" class="img-fluid w-100" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
     {% endfor %}
 </div>
     </div>

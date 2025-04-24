@@ -10,13 +10,14 @@
             <!-- Profile Section -->
             <div class="col-md-4 mb-4">
                 <h2 class="profile-heading">My Profile</h2>
-                {% if profile.profile_pic %}
-                  <img src="{{ profile.profile_pic.url }}" class="rounded-circle mb-3" width="180" height="180" alt="Profile Image">
-                {% else %}
-                <p>No profile picture uploaded.</p>
-                {% endif %}
-                <h4 class="fw-bold text-decoration-underline">{{ request.user.get_full_name|default:request.user.username }}</h4>
+                <img src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}{% else %}{% static 'images/home/astronaut.png' %}{% endif %}"
+                class="rounded-circle mb-3" width="180" height="180" alt="Profile Image">
+                
+                <h4 class="fw-bold text-decoration-underline">{{ request.user.get_full_name|default:request.user.username }}</h4> 
                 <em>{{ profile.bio }}</em>
+                <a href="{% url 'edit_profile' %}" title="Edit Profile">
+                    <i class="fa fa-edit"></i>
+                  </a>
                 <p class="mt-3">Visited: <strong>{{ visited_spots }}</strong> spots<br>Wishlist: <strong>{{ wishlist_spots }}</strong> spots</p>
                 <a href="{% url 'review_post' %}" class="btn btn-primary px-4 py-2 fw-bold">Post A Review</a> <br>
                 <a href="{% url 'my_reviews' %}" class="btn btn-success px-4 py-2 fw-bold mt-2">My Reviews</a>

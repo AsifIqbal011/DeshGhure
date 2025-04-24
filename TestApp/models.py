@@ -9,12 +9,42 @@ class Division(models.Model):
     def __str__(self):
         return self.name
 
+class Location_type(models.Model):
+    type_name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.type_name
+
 class Location(models.Model):
-    location =models.CharField(max_length=100)
+    STATUS_CHOICES = [
+        ('feature', 'Feature'),
+        ('historical', 'Historical'),
+        ('none', 'None'),
+    ]
+
+    location = models.CharField(max_length=100, unique=True)
     division = models.ForeignKey(Division, on_delete=models.CASCADE)
+    location_type = models.ForeignKey(Location_type, on_delete=models.SET_NULL, null=True)
+
+    image = models.ImageField(upload_to='location_images/', blank=True, null=True)
+    caption = models.CharField(max_length=255,blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    best_time_to_visit = models.CharField(max_length=100, blank=True, null=True)
+    cost_by_bus = models.IntegerField(default=0, help_text="Estimated cost by bus (৳)")
+    cost_by_train = models.IntegerField(default=0, help_text="Estimated cost by train (৳)")
+    cost_by_plane = models.IntegerField(default=0, help_text="Estimated cost by plane (৳)")
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='none',
+        help_text="Label this location as Featured, Historical, or None"
+    )
 
     def __str__(self):
         return self.location
+
+
 
 class Package(models.Model):
     location =models.ForeignKey(Location,on_delete=models.CASCADE)

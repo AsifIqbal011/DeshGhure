@@ -1,0 +1,79 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f9f8;
+    padding: 40px;
+  }
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1b8f6c;
+  }
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .form-group {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  input, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .full-width {
+    flex: 1 1 100%;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #1b8f6c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button:hover {
+    background-color: #157c5c;
+  }
+  .login-link a {
+    color: #157c5c;
+    text-decoration: underline;
+    font-size: 14px;
+    
+  }
+  .login-link a:hover {
+    color: #003233;
+  }
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px;
+    background-color: #e9f6f2;
+    color: #1b8f6c;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .custom-file-upload i {
+    margin-right: 8px;
+  }
+
+  input[type="file"] {
+    display: none;
+  }

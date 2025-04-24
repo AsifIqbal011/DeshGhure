@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ location.image.url }}" class="img-fluid rounded shadow" alt="{{ location.location }}">
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-primary">{{ location.location }}</h2>
+      <p class="mb-2"><strong>Division:</strong> {{ location.division.name }}</p>
+      <p class="mb-2"><strong>Type:</strong> {{ location.location_type }}</p>
+
+      {% if location.status != 'none' %}
+        <p class="mb-2">
+          <strong>Status:</strong>
+          {% if location.status == 'feature' %}
+            <span class="badge bg-success">🌟 Featured</span>
+          {% elif location.status == 'historical' %}
+            <span class="badge bg-warning">🏛 Historical</span>
+          {% endif %}
+        </p>
+      {% endif %}
+
+      {% if location.best_time_to_visit %}
+        <p class="mb-2"><strong>Best time to visit:</strong> {{ location.best_time_to_visit }}</p>
+      {% endif %}
+
+      {% if location.caption %}
+        <p class="text-muted">{{ location.caption }}</p>
+      {% endif %}
+      {% if location.description %}
+        <p>{{ location.description }}</p>
+      {% endif %}
+
+      <hr>
+      <h5 class="text-dark">Estimated Travel Cost</h5>
+      <ul class="list-unstyled">
+        <li>🚌 By Bus: <strong>৳{{ location.cost_by_bus }}</strong></li>
+        <li>🚆 By Train: <strong>৳{{ location.cost_by_train }}</strong></li>
+        <li>✈️ By Plane: <strong>৳{{ location.cost_by_plane }}</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
