@@ -3,7 +3,7 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-md-6">
-      <img src="{{ location.image.url }}" class="img-fluid rounded shadow" alt="{{ location.location }}">
+      <img src="{{ location.image.url }}" class="img-fluid rounded shadow fixed-image-box" alt="{{ location.location }}">
     </div>
     <div class="col-md-6">
       <h2 class="text-primary">{{ location.location }}</h2>
@@ -35,9 +35,15 @@
       <hr>
       <h5 class="text-dark">Estimated Travel Cost</h5>
       <ul class="list-unstyled">
-        <li>🚌 By Bus: <strong>৳{{ location.cost_by_bus }}</strong></li>
-        <li>🚆 By Train: <strong>৳{{ location.cost_by_train }}</strong></li>
-        <li>✈️ By Plane: <strong>৳{{ location.cost_by_plane }}</strong></li>
+        {%if location.cost_by_bus != 0%}
+          <li>🚌 By Bus: <strong>৳{{ location.cost_by_bus }}</strong></li>
+        {% endif %}
+        {%if location.cost_by_train != 0%}
+          <li>🚆 By Train: <strong>৳{{ location.cost_by_train }}</strong></li>
+        {% endif %}
+        {%if location.cost_by_plane != 0%}
+          <li>✈️ By Plane: <strong>৳{{ location.cost_by_plane }}</strong></li>
+        {% endif %}
       </ul>
     </div>
   </div>

@@ -9,7 +9,11 @@ import datetime
 # Create your views here.
 
 def home(request):
-    return render(request, template_name='TestApp/home.html')
+    featured_locations = Location.objects.filter(status='feature')
+    historical_locations = Location.objects.filter(status='historical')
+    context = {'featured_locations': featured_locations,
+               'historical_locations': historical_locations,}
+    return render(request, template_name='TestApp/home.html', context=context)
 
 def destination(request):
     divisions = Division.objects.all()
@@ -205,7 +209,10 @@ def delete_review(request, review_id):
     return redirect('my_reviews')
 
 def division_detail(request, name):
-    context={'division': name.capitalize()}
+    division = get_object_or_404(Division, name=name)
+    locations = Location.objects.filter(division=division)
+    context={ 'division': division,
+             'locations': locations}
     return render(request, template_name='TestApp/division_detail.html',context=context)
 
 def update_bucket_list(request):
@@ -220,3 +227,7 @@ def update_bucket_list(request):
             defaults={'status': status}
         )
         return redirect('profile')
+    
+def book_package(request):
+    messages.success(request, "✅ Booking Confirmed!")
+    return redirect('package')    

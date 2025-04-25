@@ -55,4 +55,11 @@
         </div>
     </div>
 </div>
+{% if request.GET.booked %}
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      alert("✅ Booking Confirmed!");
+    });
+  </script>
+{% endif %}
 {% endblock%}

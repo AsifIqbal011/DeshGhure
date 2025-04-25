@@ -12,7 +12,8 @@
       <p><strong>People:</strong> {{ package.numofPeople }} person(s)</p>
       <p><strong>Rating:</strong> ⭐ {{ package.rating }}</p>
       <p><strong>Price:</strong> <span class="text-success"><strong>৳</strong>{{ package.price }}</span></p>
-      <a href="{% url 'package' %}" class="btn btn-outline-primary mt-3" >Book This Package</a>
+      <a href="{% url 'package' %}?booked=true" class="btn btn-outline-primary mt-3" onclick="showBookingAlert()">Book This Package</a>
+      
     </div>
   </div>
 </div>

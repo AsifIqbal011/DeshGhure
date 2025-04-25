@@ -1,6 +1,63 @@
-{%extends 'base.html' %}
-{% block content%}
+{% extends 'base.html' %}
+{% block content %}
 {% load static %}
-<h1>Welcome to {{ division }} Division</h1>
-<p>Here you'll find all travel spots, culture, and attractions of {{ division }}.</p>
-{% endblock%}
+
+<div class="container py-5">
+    <div class="container pt-5 pb-3">
+    <div class="text-center mb-3 pb-3">
+        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Welcome to {{ division.name }} </h6>
+        <h1>Find  Culture, and Attractions</h1>
+    </div>
+
+
+  <div class="row">
+    {% for location in locations %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100 hover-shadow transition">
+          
+         
+          <div class="position-relative">
+            <img src="{{ location.image.url }}" class="card-img-top img-fluid" style="height: 230px; object-fit: cover;" alt="{{ location.location }}">
+            
+            {% if location.status != 'none' %}
+              <span class="position-absolute top-0 end-0 m-2 badge 
+                {% if location.status == 'feature' %} bg-success 
+                {% elif location.status == 'historical' %} bg-warning 
+                {% else %} bg-secondary 
+                {% endif %}">
+                {% if location.status == 'feature' %}🌟 Featured
+                {% elif location.status == 'historical' %}🏛 Historical
+                {% endif %}
+              </span>
+            {% endif %}
+          </div>
+  
+          <!-- Card body -->
+          <div class="card-body p-4">
+            
+            <h5 class="card-title text-dark fw-semibold">{{ location.location }}</h5>
+            <p class="card-text text-muted small mb-3">{{ location.caption|default:"No caption available." }}</p>
+  
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="badge bg-success text-white">৳{{ location.cost_by_bus }}</span>
+            </div>
+  
+            <!-- View Details Button -->
+            <div class="text-center">
+              <a href="{% url 'location_detail' location.id %}" 
+                 class="btn btn-sm text-white rounded-pill px-4 py-2"
+                 style="background: linear-gradient(135deg, #00b4d8, #0077b6); border: none;">
+                View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center">No locations available in this division.</p>
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+{% endblock %}

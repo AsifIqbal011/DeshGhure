@@ -1,36 +1,33 @@
 {%extends 'base.html' %}
 {% block content%}
 {% load static %}
-<div class="container mt-4 ">
+
+
+    <div class="container mt-4">
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                     <img src="{% static 'images/home/sonargaon.png' %}" class="d-block w-100" alt="Heritage Site">
-                </div>
-                <div class="carousel-item">
-                      <img src="{% static 'images/home/shhatghom.jpg' %}" class="d-block w-100" alt="Historical Place">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'images/home/shundarban.png' %}" class="d-block w-100" alt="Historical Place">
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'images/home/lalbagh.jpg' %}" class="d-block w-100" alt="Historical Place">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/home/ahsan_manzil.jpg' %}" class="d-block w-100" alt="Historical Place">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'images/home/coxs.png' %}" class="d-block w-100" alt="Historical Place">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+          <div class="carousel-inner">
+            {% for location in featured_locations %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ location.image.url }}" class="d-block w-100" alt="{{ location.location }}">
+                <a href="{% url 'location_detail' location.id %}" >
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded px-3">
+                  <h5>{{ location.location }}</h5>
+                  {% if location.caption %}
+                    <p>{{ location.caption }}</p>
+                  {% endif %}
+                </div></a>
+              </div>
+            {% endfor %}
+          </div>
+      
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
         </div>
-    </div>
+      </div>
 
 <div class="container-fluid py-5 bg-white">
     <div class="container">
@@ -41,24 +38,32 @@
                 {% include 'components/clickable_map.html' %}
             </div>
             <!-- Tourist Highlights -->
-            <div class="col-md-7">
-                <!-- Sundarbans -->
-                <div class="d-flex mb-4 align-items-start">
-                    <img src="{% static 'images/home/shundarban.png' %}" class="rounded-circle me-3" width="150" height="150" alt="Sundarbans">
-                    <div class="bg-warning p-3 rounded-4">
-                        <strong>Sundarbans:</strong> <span class="d-inline-block">world's largest mangrove forest and a UNESCO World Heritage Site. This unique ecosystem is home to the Royal Bengal Tiger, spotted deer, crocodiles, and a diverse array of bird species. The forest is characterized by a complex network of tidal waterways, mudflats, and small islands, making it a unique and vital ecosystem.</span>
-                    </div>
-                </div>
+            
 
-                <!-- Cox's Bazar -->
+       
+        <div class="col-md-7">
+            {% for location in historical_locations %}
+              {% if forloop.counter|divisibleby:2 %}
+                <!-- Image Right, Text Left -->
                 <div class="d-flex mt-4 align-items-start">
-                    <div class="bg-warning p-3 rounded-4 me-3">
-                        <strong>Cox's Bazar:</strong> <span class="d-inline-block">The coastal city in southeastern Bangladesh, renowned for its 120-kilometer-long unbroken sandy beach, the world's longest natural sea beach. This popular tourist destination offers attractions like Himchari National Park, Inani Beach, and Dulahazara Safari Park.</span>
-                    </div>
-                    <img src="{% static 'images/home/coxs.png' %}" class="rounded-circle" width="150" height="150" alt="Cox's Bazar">
+                  <div class="bg-warning p-3 rounded-4 me-3">
+                    <strong>{{ location.location }}:</strong>
+                    <span class="d-inline-block">{{ location.description|truncatewords:55 }}</span>
+                  </div>
+                  <a href="{% url 'location_detail' location.id %}" ><img src="{{ location.image.url }}" class="rounded-circle object-fit-cover" width="150" height="150" alt="{{ location.location }}"></a>
                 </div>
-            </div>
-
+              {% else %}
+                <!-- Image Left, Text Right -->
+                <a href="{% url 'location_detail' location.id %}" > <div class="d-flex mb-4 align-items-start">
+                  <img src="{{ location.image.url }}" class="rounded-circle me-3 object-fit-cover" width="150" height="150" alt="{{ location.location }}"></a>
+                  <div class="bg-warning p-3 rounded-4">
+                    <strong>{{ location.location }}:</strong>
+                    <span class="d-inline-block">{{ location.description|truncatewords:55 }}</span>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
     </div>
 </div>
