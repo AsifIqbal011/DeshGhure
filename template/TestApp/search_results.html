@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+  <h3>Search Results{% if search_query %} for “{{ search_query }}”{% endif %}</h3>
+  <div class="row mt-4">
+    {% for location in results %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+          <a href="{% url 'location_detail' location.id %}"><img src="{{ location.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;"></a>
+          <div class="card-body">
+            <h5 class="card-title">{{ location.location }}</h5>
+            <p class="card-text">{{ location.caption|truncatewords:20 }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted">No destinations found for your search.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

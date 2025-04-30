@@ -1,0 +1,229 @@
+.navbar {
+    background-color: #ececec;
+  }
+  .nav-item .btn {
+    background-color: #68a29d;
+    color: white;
+    border-radius: 10px;
+    margin: 7px 0;
+  }
+
+  /* Carousel Image Sizes */
+  .carousel-item img {
+    width: 100%;
+    object-fit: cover;
+  }
+  .bg-warning {
+    background-color: #ffd84a !important;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .package-item:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  .blog-item {
+    transition: 0.5s;
+  }
+
+  .blog-item:hover {
+    box-shadow: 0 0 30px #cccccc;
+  }
+
+  .blog-date {
+    position: absolute;
+    width: 60px;
+    height: 45px;
+    top: 30px;
+    left: -15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #7ab730;
+  }
+
+  .blog-date::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: -15px;
+    left: 0;
+    border: 8px solid;
+    border-color: transparent #5f8f25 #5f8f25 transparent;
+    z-index: 1;
+  }
+  .review-form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .fixed-image-box {
+        width: 100%;
+        height: 350px !important;
+        object-fit: cover;
+        border-radius: 5px;
+}
+    .fixed-image {
+        width: 100%;
+        height: 250px !important;
+        object-fit: cover;
+        border-radius: 5px;
+}
+    .form-title {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .text-white {
+        color: #fff !important;
+  }
+    .text-decoration-none {
+       text-decoration: none !important;
+  }
+  .destination-overlay {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: .5s;
+    z-index: 1;
+}
+.img-fluid {
+max-width: 100%;
+height: auto;
+}
+.mb-2,
+.my-2 {
+margin-bottom: 0.5rem !important;
+}
+.overflow-hidden {
+overflow: hidden !important;
+}
+.position-relative {
+position: relative !important;
+}
+.destination-item img {
+transition: .5s;
+}
+
+.destination-item:hover img {
+transform: scale(1.3);
+}
+
+.destination-overlay {
+position: absolute;
+top: 30px;
+right: 30px;
+bottom: 30px;
+left: 30px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: rgba(0, 0, 0, 0.3);
+border: 1px solid rgba(255, 255, 255, 0.5);
+transition: .5s;
+z-index: 1;
+}
+
+.destination-item:hover .destination-overlay {
+top: 0px;
+right: 0px;
+bottom: 0px;
+left: 0px;
+border-width: 30px;
+}
+.mapCard_red{
+background-color: rgba(176, 29, 16, 0.788);
+color: rgb(0, 168, 171);
+}
+
+  /* Large screen image size */
+  @media (min-width: 992px) {
+    .carousel-item img {
+      height: 580px;
+    }
+  }
+
+  /* Small screen image size */
+  @media (max-width: 991px) {
+    .carousel-item img {
+      height: 350px;
+    }
+  }
+  /* Footer */
+  .footer .btn.btn-social {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    font-weight: normal;
+    border: 1px solid #ffffff;
+    border-radius: 35px;
+    transition: 0.3s;
+  }
+
+  .footer .btn.btn-social:hover {
+    color: var(--primary);
+  }
+
+  .footer .btn.btn-link {
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+    text-align: left;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: capitalize;
+    transition: 0.3s;
+  }
+
+  .footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+  }
+
+  .footer .btn.btn-link:hover {
+    letter-spacing: 1px;
+    box-shadow: none;
+  }
+
+  .footer .copyright {
+    padding: 25px 0;
+    font-size: 15px;
+    border-top: 1px solid rgba(256, 256, 256, 0.1);
+  }
+
+  .footer .copyright a {
+    color: var(--light);
+    text-decoration: none;
+  }
+
+  .footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+  }

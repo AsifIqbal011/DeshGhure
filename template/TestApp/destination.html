@@ -7,6 +7,7 @@
             <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
             <h1>Explore Top Destination</h1>
         </div>
+
         <div class="row">
             {% for location in featured_locations %}
             <div class="col-lg-4 col-md-6 mb-4">
@@ -30,6 +31,36 @@
             </div>
         </div>
 
+        <div class="container mb-4">
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+              <a href="{% url 'destination' %}" class="btn {% if not selected_type %}btn-primary{% else %}btn-outline-primary{% endif %}">All Types</a>
+              {% for type in types %}
+                  <a href="?type={{ type.type_name }}{% if selected_division_id %}&division={{ selected_division_id }}{% endif %}"
+                     class="btn {% if selected_type == type.type_name %}btn-primary{% else %}btn-outline-primary{% endif %}">
+                      {{ type.type_name|capfirst }}
+                  </a>
+              {% endfor %}
+          </div>
+      </div>
+
+      <div class="row mt-4">
+        {% for location in locations %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow">
+                  <a href="{% url 'location_detail' location.id %}">
+                    <img src="{{ location.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="{{ location.location }}"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ location.location }}</h5>
+                        <p class="card-text">{{ location.caption|truncatewords:15 }}</p>
+                        <span class="badge bg-info">{{ location.location_type|upper }}</span>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">No destinations found for this category.</p>
+        {% endfor %}
+    </div>
+
         <div class="container-fluid bg-light py-3 mb-4">
             <div class="d-flex flex-wrap justify-content-center nav nav-pills" id="divisionTabs">
               {% for division in divisions %}
@@ -43,13 +74,14 @@
             </div>
           </div>
         
+
           <div class="container">
             <div class="row" id="locationList">
               {% for location in locations %}
-                <div class="col-12 mb-4">
+                <div class="col-12 mb-4 package-item " >
                   <div class="d-flex flex-column flex-md-row shadow-sm bg-white rounded overflow-hidden">
                     <div class="col-md-4 p-0">
-                      <img src="{{ location.image.url }}" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 220px;" alt="{{ location.location }}">
+                      <img src="{{ location.image.url }}" class="img-fluid w-100 h-100 object-fit-cover fixed-image" style="min-height: 220px;" alt="{{ location.location }}">
                     </div>
                     <div class="col-md-5 p-4">
                       <h5 class="text-uppercase text-primary">{{ location.location }}</h5>

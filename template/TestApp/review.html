@@ -8,36 +8,6 @@
             <h1>Latest From Traveler</h1>
         </div>
         <div class="row pb-3">
-            <div class="col-lg-4 col-md-6 mb-4 pb-2">
-                <div class="blog-item package-item ">
-                    <div class="position-relative" >
-                        <img class="img-fluid fixed-image" src="{% static 'images/home/chittagong.jpg' %}" alt="" >
-                        <div class="blog-date">
-                            <h6 class="font-weight-bold mb-n1">01</h6>
-                            <small class="text-white text-uppercase">Jan</small>
-                        </div>
-                    </div>
-                    <div class="bg-white p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h5 class="mb-0 text-primary">Cox's Bazar</h5>
-                            <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i> 4.5</h6>
-                            
-                          </div>
-                          <p class="mb-3">
-                            <i class="fas fa-quote-left text-primary me-2"></i>
-                            The sea beach was stunning.
-                          </p>
-                          <!--{{ review.text|truncatewords:20 }}-->
-                          <div class="border-top mt-4 pt-4">
-                            <div class="d-flex justify-content-between">
-                                <small class="text-muted">by Asif Iqbal</small>
-                            </div>
-                        </div>
-                        </div>
-                </div>
-            </div>
-       <!--  </div>
-       <div class="row pb-3">-->
     {% for review in reviews %}
         
             <div class="col-lg-4 col-md-6 mb-4 pb-2">

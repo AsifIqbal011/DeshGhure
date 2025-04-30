@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login,authenticate ,logout as auth_logout
 from django.contrib import messages
 from .models import *
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
 import datetime
 # Create your views here.
 
@@ -17,19 +16,28 @@ def home(request):
 
 def destination(request):
     divisions = Division.objects.all()
+    types = Location_type.objects.all()
+
     selected_division_id = request.GET.get('division')
+    selected_type = request.GET.get('type')
 
     featured_locations = Location.objects.filter(status='feature')
 
+    locations = Location.objects.all()
+
+    if selected_type:
+        locations = locations.filter(location_type__type_name=selected_type)
+    
     if selected_division_id:
         locations = Location.objects.filter(division_id=selected_division_id)
-    else:
-        locations = Location.objects.all()
+    
         
-    context = {'divisions': divisions,
-        'locations': locations,
-        'featured_locations': featured_locations,
-        'selected_division_id': int(selected_division_id) if selected_division_id else None,}
+    context ={'divisions': divisions,
+              'types': types,
+              'locations': locations,
+              'featured_locations': featured_locations,
+              'selected_division_id': int(selected_division_id) if selected_division_id else None,
+              'selected_type': selected_type,}
     return render(request, 'TestApp/destination.html', context=context) 
 
 def location_detail(request, location_id):
@@ -42,6 +50,7 @@ def package(request):
     context={'packages': packages}
     return render(request, template_name='TestApp/package.html',context=context)
 
+@login_required
 def package_detail(request, package_id):
     package = get_object_or_404(Package, id=package_id)
     context={'package': package}
@@ -215,6 +224,7 @@ def division_detail(request, name):
              'locations': locations}
     return render(request, template_name='TestApp/division_detail.html',context=context)
 
+@login_required
 def update_bucket_list(request):
     if request.method == 'POST':
         location_name = request.POST.get('location')
@@ -231,3 +241,21 @@ def update_bucket_list(request):
 def book_package(request):
     messages.success(request, "✅ Booking Confirmed!")
     return redirect('package')    
+
+def search_results(request):
+    search_query = request.GET.get('search')
+    results = []
+
+    if search_query:
+        results = Location.objects.filter(location__icontains=search_query)
+
+    if search_query:
+        results = Location.objects.filter(location__icontains=search_query)
+        print(f"Search Query: {search_query}")
+        print(f"Found {results.count()} results.")
+
+    context = {
+        'search_query': search_query,
+        'results': results
+    }
+    return render(request, 'TestApp/search_results.html', context=context)

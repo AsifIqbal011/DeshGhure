@@ -40,6 +40,7 @@ urlpatterns = [
     path('my-reviews/', t_views.my_reviews, name='my_reviews'),
     path('review/edit/<str:review_id>/',t_views.edit_review, name='edit_review'),
     path('review/delete/<str:review_id>/', t_views.delete_review, name='delete_review'),
+    path('search/', t_views.search_results, name='search_results'),
 ]
 
 if settings.DEBUG:
