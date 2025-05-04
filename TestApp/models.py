@@ -68,10 +68,12 @@ class Review(models.Model):
     review_img = models.ImageField(upload_to='review_pic')
 
     def __str__(self):
-        return f"{self.user.username} - {self.location}"    
+        if self.user:
+            return f"Review by {self.user.username}"
+        return "Review by Unknown User"    
     
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,)
     phone = models.CharField(max_length=20, blank=True)
     bio = models.TextField(blank=True)
     profile_pic = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
